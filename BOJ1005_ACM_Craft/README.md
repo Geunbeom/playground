@@ -1,3 +1,2 @@
-# playground
-- 알고리즘 및 코드 놀이터..
-- 알고리즘을 시각화 해보기
+# BOJ1005_ACM_Craft
+https://www.acmicpc.net/problem/1005

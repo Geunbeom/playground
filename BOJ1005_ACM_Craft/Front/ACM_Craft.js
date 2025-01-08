@@ -26,8 +26,8 @@ function randomNode() {
             var y = Math.round(Math.random()*45);
             if (x*y === 0) continue;
             if (map.get(x*100+y) == null) {
-                for (let i=-5; i<=5; i++) {
-                    for (let j=-5; j<=5; j++) {
+                for (let i=-10; i<=10; i++) {
+                    for (let j=-10; j<=10; j++) {
                         if (x+i >= 0 && y+j >= 0)
                         map.set((x+i)*100+(y+j), true);
                     }            
@@ -62,19 +62,48 @@ function makeGrapgh(poses) {
 
     graphs.forEach(e => {
         const ele = document.createElement("div");
+        const stick = document.createElement("div");
+        const arrow01 = document.createElement("div");
+        const arrow02 = document.createElement("div");
         const dis = Math.sqrt(Math.pow(real[e[0]-1][0]-real[e[1]-1][0], 2)
                             + Math.pow(real[e[0]-1][1]-real[e[1]-1][1], 2));
 
+        stick.style.cssText = "position:absolute;"
+                            + `width: ${dis*10-25}px;`
+                            + "height: 5px;"
+                            + "background-color:rgba(0, 0, 0, 0.4);"
+
+        arrow01.style.cssText = "position:absolute;"
+                            + `width: 20px;`
+                            + "height: 5px;"
+                            + "top: 0px;"
+                            + `left: ${dis*10-45}px;`
+                            + "background-color:rgba(0, 0, 0, 0.4);"
+                            + "transform-origin: right top;"
+                            + "transform: rotate(30deg);"
+
+        arrow02.style.cssText = "position:absolute;"
+                            + `width: 20px;`
+                            + "height: 5px;"
+                            + "top: 0px;"
+                            + `left: ${dis*10-45}px;`
+                            + "background-color:rgba(0, 0, 0, 0.4);"
+                            + "transform-origin: right top;"
+                            + "transform: rotate(-30deg);"
+
         ele.style.cssText = "position:absolute;"
-                            + `width: ${dis*10}px;`
-                            + "height: 3px;"
-                            + "background-color:rgba(0, 0, 0, 0.5);"
                             + "left: 25px;"
                             + "transform-origin: left top;"
                             + `transform: rotate(${Math.atan2(
                                 real[e[1]-1][1]-real[e[0]-1][1],
                                 real[e[1]-1][0]-real[e[0]-1][0],
                             )}rad);`
+                            + "z-index: -1;";
+        
+        ele.append(stick);
+        ele.append(arrow01);
+        ele.append(arrow02);
+
         document.querySelector(`.node-${e[0]}`).append(ele);
 
     })

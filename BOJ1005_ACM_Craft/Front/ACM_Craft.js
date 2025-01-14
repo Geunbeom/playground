@@ -1,3 +1,5 @@
+import { output } from "./Solution.js";
+
 document.querySelector(".title").innerText = "ACM Craft 실험실";
 document.querySelector(".input").addEventListener('click', () => randomNode());
 
@@ -72,7 +74,7 @@ function makeGrapgh(poses) {
     graphs = [];
     poses.forEach((e, i) => {
         if (i === poses.length-1) return;
-        var rd = Math.round(Math.random()*3);
+        var rd = Math.round(Math.random()*2);
         for(let j=0; j<=rd; j++) {
             if (i+j+1 === poses.length) break;
             graphs.push([poses[i][2], poses[i+j+1][2]]);
@@ -145,3 +147,13 @@ function hoverOff(e, i) {
         t.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
     })
 }
+
+export function getNode() {
+    return poses;
+}
+
+export function getGraph() {
+    return graphs;
+}
+
+output();
